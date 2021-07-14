@@ -30,4 +30,6 @@ export default defineConfig({
   dynamicImport: {
     loading: '@/components/Loading',
   },
+
+ 
 });

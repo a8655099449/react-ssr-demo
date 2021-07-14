@@ -17,6 +17,7 @@ interface Iroutes {
    */
   exact?: boolean;
   routes?: Iroutes[];
+  text?: string;
   [k: string]: any;
 }
 
@@ -28,15 +29,39 @@ const HomeRoutes: Iroutes[] = [
   {
     path: '/home',
     component: '@/pages/home/Home',
+    desc: '首页',
   },
   {
-    path: '/profile',
-    component: '@/pages/profile/Profile',
+    path: '/center',
+    component: '@/pages/center/center',
+    desc: '中心概况',
   },
   {
-    path: '/shop',
-    component: '@/pages/shop/Shop',
+    path: '/education',
+    component: '@/pages/education/education',
+    desc: '教育培养',
   },
+  {
+    path: '/net',
+    component: '@/pages/net/net',
+    desc: '协同网络',
+  },
+  {
+    path: '/support',
+    component: '@/pages/support/support',
+    desc: '对口支持',
+  },
+  {
+    path: '/public',
+    component: '@/pages/public/public',
+    desc: '公共服务',
+  },
+  {
+    path: '/staff',
+    component: '@/pages/staff/staff',
+    desc: '职工成员',
+  },
+ 
 ];
 
 const routes: Iroutes[] = [
