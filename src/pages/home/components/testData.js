@@ -11,8 +11,7 @@ export const visualMap = [
     // itemGap:30
     itemSymbol: 'pin',
   },
-]
-
+];
 
 export const wjx = {
   type: 'scatter',
@@ -41,13 +40,13 @@ export const wjx = {
       return '中南大学湘雅二医院';
     },
   },
-}
-
+  zlevel: 3,
+};
 
 export const eightCore = {
   type: 'scatter',
   coordinateSystem: 'geo',
-  symbol: "circle", //点的样式
+  symbol: 'circle', //点的样式
   itemStyle: {
     color: '#fff209',
   },
@@ -57,4 +56,39 @@ export const eightCore = {
       name: '齐齐哈尔医学院',
     },
   ],
-}
+  zlevel: 3,
+
+};
+
+export const testLine = {
+  data: [
+    {
+      fromName: '上海',
+      toName: '包头',
+      coords: [
+        [112.954094, 28.237181],
+        [123.957548, 47.384783],
+      ],
+    },
+  ],
+  effect: {
+    show: true,
+    period: 1,
+    trailLength: 0,
+    symbol:
+      'circle',
+    // symbol:
+    //   'path://M512 6.4C505.6 0 492.8 0 480 0s-25.6 0-32 6.4c-12.8 6.4-19.2 19.2-25.6 25.6L6.4 761.6c-12.8 19.2-12.8 44.8 0 64 6.4 12.8 12.8 12.8 25.6 19.2s19.2 6.4 32 6.4h819.2c12.8 0 25.6 0 32-6.4 12.8-6.4 19.2-12.8 25.6-19.2 12.8-19.2 12.8-44.8 0-64L537.6 32C531.2 25.6 524.8 12.8 512 6.4z',
+    symbolSize: 15,
+  },
+  lineStyle: {
+    color: '#fff209',
+    width: 1,
+    opacity: 1,
+    curveness: 0.2,
+  },
+  symbol: ['none', 'arrow'],
+  symbolSize: 10,
+  type: 'lines',
+  zlevel: 2,
+};
