@@ -1,5 +1,32 @@
-* {
+@import url('./style/base.css');
+@import url('//at.alicdn.com/t/font_2679040_27757funw6mi.css');
+
+*,
+p,
+div {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-size: 14px;
+}
+
+li,
+ol {
+  list-style: none;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: 600;
+}
+.center {
+  text-align: center;
+}
+img {
+  object-fit: cover;
 }
 
 @import url('./style/box.css');

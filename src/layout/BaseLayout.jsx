@@ -2,14 +2,23 @@ import React from 'react';
 import { NavLink } from 'umi';
 import BaseNav from './components/BaseNav';
 import Crumbs from './components/crumbs';
+import Footer from './components/footer';
+import RightTool from './components/rightTool';
 
 export default function BaseLayout({ children }) {
   return (
-    <div>
+    <>
       <BaseNav />
-      {/* <Crumbs /> */}
-      {children}
-      <footer>footer</footer>
-    </div>
+      <Crumbs />
+      <main
+        style={{
+          minHeight: '80vh',
+        }}
+      >
+        {children}
+      </main>
+      <RightTool />
+      <Footer />
+    </>
   );
 }

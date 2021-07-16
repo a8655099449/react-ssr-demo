@@ -46,3 +46,4 @@
 //     updater();
 //   },
 // };
+import "antd/dist/antd.css";

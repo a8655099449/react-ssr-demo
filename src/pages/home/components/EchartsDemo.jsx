@@ -1,13 +1,20 @@
 import React, { useEffect, useRef } from 'react';
 import echarts from 'echarts';
-import 'echarts/map/js/china.js';
+import './provincesMap';
 import styles from '../home.less';
-import { eightCore, testLine, wjx } from './testData';
+import {
+  eightCoreSeries,
+  eightLineSerise,
+  wjx,
+  TFCircleSeries,
+  TFLineSeries,
+} from './testData';
+import useHooks, { Context, getContxet } from './hooks';
 
 function EchartsDemo() {
-  const drawChart = () => {
-    console.log('👴2021-07-14 17:02:41 EchartsDemo.jsx line:13', wjx);
+  const { handleMapMove } = getContxet();
 
+  const drawChart = () => {
     const china = echarts.init(ref.current);
     // ! 八家分中心
     china.setOption({
@@ -42,16 +49,46 @@ function EchartsDemo() {
           },
         },
       },
-
       series: [
         wjx, // 中心的红色五角星
-        eightCore,
-        testLine
-  
-
-       
+        eightCoreSeries,
+        eightLineSerise,
+        TFCircleSeries,
+        TFLineSeries,
+        // {
+        //   type: 'map',
+        //   mapType: '西藏',
+        //   zlevel: 4,
+        //   zoom:0.2,
+        //   left:'auto'
+        // },
       ],
+      tooltip: {
+        show: true, //是否显示提示框组件，包括提示框浮层和 axisPointer。
+        trigger: 'item', //触发类型。item,axis,none
+        enterable: true, //鼠标是否可进入提示框浮层中，默认为false，
+        showContent: true, //是否显示提示框浮层
+        triggerOn: 'mousemove', //提示框触发的条件(mousemove|click|none)
+        showDelay: 0, //浮层显示的延迟，单位为 ms，默认没有延迟，也不建议设置。在 triggerOn 为 'mousemove' 时有效。
+        textStyle: {
+          color: 'white',
+          fontSize: 12,
+        },
+
+        alwaysShowContentL: false,
+        padding: [0, 8],
+        position: 'top',
+        hideDelay: 10, //浮层隐藏的延迟
+        formatter: o => {
+          return o.name;
+        },
+
+        backgroundColor: 'rgba(0,0,0,.3)', //提示框浮层的背景颜色。
+        transitionDuration: 1, //提示框浮层的移动动画过渡时间，单位是 s，设置为 0 的时候会紧跟着鼠标移动。
+      },
     });
+
+    china.on('mousemove', handleMapMove);
   };
 
   const ref = useRef();
@@ -74,13 +111,98 @@ function EchartsDemo() {
 }
 
 const EchartsLayout = props => {
-  let { item } = props;
+  const hooks = useHooks();
   return (
-    <div className={`${styles['w']} container`}>
-      <div className={`${styles['map-warp']}`}>
-        <EchartsDemo />
+    <Context.Provider
+      value={{
+        ...hooks,
+      }}
+    >
+      <div className={`${styles['w']}`}>
+        <div className={`${styles['map-warp']}`}>
+          <EchartsDemo />
+          <ProvincesMap />
+          <HandleList />
+        </div>
       </div>
+    </Context.Provider>
+  );
+};
+
+const listOptions = [
+  {
+    text: '8家分中心',
+  },
+  {
+    text: '25家核心单位',
+  },
+  {
+    text: '319家基层网络单位',
+  },
+  {
+    text: '覆盖7大区22大省',
+  },
+  {
+    text: '省份覆盖率65%',
+  },
+  {
+    text: '地级市覆盖率65%',
+  },
+];
+
+const HandleList = () => {
+  const { leftList, leftListIndex, handleLeftList } = getContxet();
+
+  return (
+    <div className={`${styles['handle-list']}`}>
+      {leftList.map((item, index) => (
+        <div
+          key={index}
+          className={`${styles['list-item']} ${
+            leftListIndex === index ? styles['active'] : ''
+          }`}
+          onClick={() => handleLeftList(index)}
+        >
+          {item.text}
+        </div>
+      ))}
     </div>
   );
 };
+
+const ProvincesMap = () => {
+  const { provShow: show, initProv } = getContxet();
+
+  useEffect(() => {
+    drwa();
+  }, []);
+
+  const ref = useRef();
+
+  const drwa = () => {
+    const pro = echarts.init(ref.current);
+
+    initProv(pro);
+
+    // pro.setOption({
+    //   series: [
+    //     {
+    //       type: 'map',
+    //       mapType: '西藏',
+    //     },
+    //   ],
+    // });
+  };
+
+  return (
+    <div
+      className={`${styles['provinces-map']}`}
+      ref={ref}
+      style={{
+        display: show ? 'block' : 'none',
+      }}
+    ></div>
+  );
+};
+
 export default EchartsLayout;

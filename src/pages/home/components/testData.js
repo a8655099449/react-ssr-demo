@@ -1,3 +1,13 @@
+import { eightColor, TFcolor } from "../../../../db/chart/config";
+import eightCore from "../../../../db/chart/eightCore";
+import { getCirleSerise, getLineSerise } from "../../../../db/chart/tool";
+import TFdata from "../../../../db/chart/twentyFive";
+
+const MAIN = {
+  name: '中南大学湘雅二医院',
+  coord: [112.954094, 28.237181]
+}
+
 export const visualMap = [
   {
     show: true,
@@ -27,68 +37,134 @@ export const wjx = {
   label: '湘雅2',
   data: [
     {
-      name: '长沙',
-      value: [112.954094, 28.237181],
+      name: MAIN.name,
+      value: MAIN.coord,
     },
   ],
   label: {
-    text: '长沙市',
+
     show: true,
     position: 'bottom',
     fontSize: 10,
-    formatter: (...params) => {
-      return '中南大学湘雅二医院';
+    formatter: (item) => {
+      return item.name
     },
   },
   zlevel: 3,
 };
 
-export const eightCore = {
-  type: 'scatter',
-  coordinateSystem: 'geo',
-  symbol: 'circle', //点的样式
+
+
+
+
+// ! 八大核心的黄点
+
+export const eightCoreSeries = getCirleSerise({
+  list: eightCore,
+  color: eightColor
+})
+
+
+
+// ! 8大核心的连线
+
+export const eightLineSerise = getLineSerise({
+  list: eightCore,
+  color: eightColor
+})
+
+
+// ! 25单位紫色点
+export const TFCircleSeries = getCirleSerise({
+  list: TFdata,
+  color: TFcolor
+})
+
+
+// ! 25单位紫色线
+export const TFLineSeries = getLineSerise({
+  list: TFdata,
+  color: TFcolor
+})
+
+// ! 左侧列表
+
+export const leftList = [
+  {
+    text: '8家分中心',
+  },
+  {
+    text: '25家核心单位',
+  },
+  {
+    text: '319家基层网络单位',
+  },
+  {
+    text: '覆盖7大区22大省',
+  },
+  {
+    text: '省份覆盖率65%',
+  },
+  {
+    text: '地级市覆盖率65%',
+  },
+];
+
+
+
+export const provSeiers = {
+  name: "地图",
+  type: "map", //地图种类
+  map: "china", //地图类型。
+  data: [
+    { name: "北京", value: Math.round(Math.random() * 500) },
+    { name: "天津", value: Math.round(Math.random() * 500) },
+    { name: "上海", value: Math.round(Math.random() * 500) },
+    { name: "重庆", value: Math.round(Math.random() * 500) },
+    { name: "河北", value: Math.round(Math.random() * 500) },
+    { name: "河南", value: Math.round(Math.random() * 500) },
+    { name: "云南", value: Math.round(Math.random() * 500) },
+    { name: "辽宁", value: Math.round(Math.random() * 500) },
+    { name: "黑龙江", value: Math.round(Math.random() * 500) },
+    { name: "湖南", value: Math.round(Math.random() * 500) },
+    { name: "安徽", value: Math.round(Math.random() * 500) },
+    { name: "山东", value: Math.round(Math.random() * 500) },
+    { name: "新疆", value: Math.round(Math.random() * 500) },
+    { name: "江苏", value: Math.round(Math.random() * 500) },
+    { name: "浙江", value: Math.round(Math.random() * 500) },
+    { name: "江西", value: Math.round(Math.random() * 500) },
+    { name: "湖北", value: Math.round(Math.random() * 500) },
+    { name: "广西", value: Math.round(Math.random() * 500) },
+    { name: "甘肃", value: Math.round(Math.random() * 500) },
+    { name: "山西", value: Math.round(Math.random() * 500) },
+    { name: "内蒙古", value: Math.round(Math.random() * 500) },
+    { name: "陕西", value: Math.round(Math.random() * 500) },
+    { name: "吉林", value: Math.round(Math.random() * 500) },
+    { name: "福建", value: Math.round(Math.random() * 500) },
+    { name: "贵州", value: Math.round(Math.random() * 500) },
+    { name: "广东", value: Math.round(Math.random() * 500) },
+    { name: "青海", value: Math.round(Math.random() * 500) },
+    { name: "西藏", value: Math.round(Math.random() * 500) },
+    { name: "四川", value: Math.round(Math.random() * 500) },
+    { name: "宁夏", value: Math.round(Math.random() * 500) },
+    { name: "海南", value: Math.round(Math.random() * 500) },
+    { name: "台湾", value: Math.round(Math.random() * 500) },
+    { name: "香港", value: Math.round(Math.random() * 500) },
+    { name: "澳门", value: Math.round(Math.random() * 500) },
+    { name: "南海诸岛", value: Math.round(Math.random() * 500) }
+  ],
   itemStyle: {
-    color: '#fff209',
+    //地图区域的多边形 图形样式。
+    emphasis: {
+      //高亮状态下的样试
+      label: {
+        show: true
+      }
+    }
   },
-  data: [
-    {
-      value: [123.957548, 47.384783],
-      name: '齐齐哈尔医学院',
-    },
-  ],
-  zlevel: 3,
-
-};
-
-export const testLine = {
-  data: [
-    {
-      fromName: '上海',
-      toName: '包头',
-      coords: [
-        [112.954094, 28.237181],
-        [123.957548, 47.384783],
-      ],
-    },
-  ],
-  effect: {
-    show: true,
-    period: 1,
-    trailLength: 0,
-    symbol:
-      'circle',
-    // symbol:
-    //   'path://M512 6.4C505.6 0 492.8 0 480 0s-25.6 0-32 6.4c-12.8 6.4-19.2 19.2-25.6 25.6L6.4 761.6c-12.8 19.2-12.8 44.8 0 64 6.4 12.8 12.8 12.8 25.6 19.2s19.2 6.4 32 6.4h819.2c12.8 0 25.6 0 32-6.4 12.8-6.4 19.2-12.8 25.6-19.2 12.8-19.2 12.8-44.8 0-64L537.6 32C531.2 25.6 524.8 12.8 512 6.4z',
-    symbolSize: 15,
-  },
-  lineStyle: {
-    color: '#fff209',
-    width: 1,
-    opacity: 1,
-    curveness: 0.2,
-  },
-  symbol: ['none', 'arrow'],
-  symbolSize: 10,
-  type: 'lines',
-  zlevel: 2,
-};
+  zoom: 1, //放大比例
+  label: {
+    //图形上的文本标签，可用于说明图形的一些数据信息
+    show: true
+  }
+}

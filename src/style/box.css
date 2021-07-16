@@ -22,3 +22,31 @@
   /* border-bottom: 1px solid var(--boder-color); */
   border-bottom: 1px solid var(--border-color);
 }
+.obeject-cover {
+  object-fit: cover;
+}
+
+.box-border {
+  background: linear-gradient(to left, var(--main-color-2), var(--main-color-2))
+      left top no-repeat,
+    linear-gradient(to bottom, var(--main-color-2), var(--main-color-2)) left
+      top no-repeat,
+    linear-gradient(to left, var(--main-color-2), var(--main-color-2)) right top
+      no-repeat,
+    linear-gradient(to bottom, var(--main-color-2), var(--main-color-2)) right
+      top no-repeat,
+    linear-gradient(to left, var(--main-color-2), var(--main-color-2)) left
+      bottom no-repeat,
+    linear-gradient(to bottom, var(--main-color-2), var(--main-color-2)) left
+      bottom no-repeat,
+    linear-gradient(to left, var(--main-color-2), var(--main-color-2)) right
+      bottom no-repeat,
+    linear-gradient(to left, var(--main-color-2), var(--main-color-2)) right
+      bottom no-repeat;
+  background-size: 3px 15px, 15px 3px, 3px 15px, 15px 3px;
+}
+
+.postion-y-center {
+  top: 50%;
+  transform: translateY(-50%);
+}

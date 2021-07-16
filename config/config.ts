@@ -30,6 +30,7 @@ export default defineConfig({
   dynamicImport: {
     loading: '@/components/Loading',
   },
-
- 
+  theme: {
+    'primary-color': '#102f7d',
+  },
 });
